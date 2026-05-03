@@ -1,34 +1,31 @@
-/*
 pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Hello World from Jenkins 🚀'
-            }
-        }
-    }
-}*/
-pipeline {
-    agent any
-
-    stages {
-        stage('Check Java') {
-            steps {
-                sh 'java -version'
-            }
-        }
 
         stage('Checkout Code') {
-                    steps {
-                        checkout scm
-                    }
-                }
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Check Environment') {
+            steps {
+                sh 'java -version'
+                sh './gradlew --version'
+            }
+        }
+
+        stage('Clean Build') {
+            steps {
+                sh './gradlew clean'
+            }
+        }
+
         stage('Build') {
-            steps{
+            steps {
                 sh 'chmod +x gradlew'
-                sh './gradlew build -x test'
+                sh './gradlew build -x test --no-daemon'
             }
         }
     }
