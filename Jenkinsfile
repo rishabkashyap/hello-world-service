@@ -1,3 +1,4 @@
+/*
 pipeline {
     agent any
 
@@ -8,4 +9,14 @@ pipeline {
             }
         }
     }
+}*/
+pipeline {
+    agent any
+
+    stage('build') {
+    steps{
+    sh 'chmod +x gradlew'
+    sh './gradlew build'
+    }
+}
 }
