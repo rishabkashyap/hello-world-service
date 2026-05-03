@@ -28,5 +28,10 @@ pipeline {
                 sh './gradlew build -x test --no-daemon'
             }
         }
+        stage('Docker Build') {
+                    steps {
+                        sh 'docker build -t hello-world-service .'
+                    }
+                }
     }
 }
