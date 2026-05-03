@@ -14,6 +14,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Check Java') {
+            steps {
+                sh 'java -version'
+            }
+        }
+
         stage('Checkout Code') {
                     steps {
                         checkout scm
